@@ -34,7 +34,7 @@ pushd /tmp/untilitworks_build/darwin/
 tar cvzf /tmp/untilitworks_build/untilitworks_darwin.tar.gz untilitworks
 popd
 
-go run ../main.go file < README.tmpl.md > ../README.md -var "version=$VERSION"
+temple file < README.tmpl.md > ../README.md -var "version=$VERSION"
 git add ../README.md
 git commit -m 'release bump'
 
