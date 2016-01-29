@@ -14,13 +14,14 @@ import (
 
 const (
 	appName = "untilitworks"
-	version = ""
+	version = "devel"
 )
 
 func main() {
 
 	retryType := flag.String("retry", "constantly", "retry type, one of 'c'/'constantly' or 'e'/'exponentially'")
 	sleep := flag.Duration("sleep", time.Second, "how long to sleep between retries (base duration for exponential)")
+	max := flag.Duration("max", 0, "it set, maximum duration for which to wait until it works")
 	factor := flag.Float64("exp.factor", 2, "backoff factor for exponential retries")
 	cap := flag.Duration("exp.cap", 30*time.Second, "max time to backoff for")
 	quiet := flag.Bool("q", false, "whether to suppress the command's output")
@@ -28,11 +29,7 @@ func main() {
 	flag.Parse()
 
 	if *pversion {
-		if version == "" {
-			fmt.Println(appName + "-devel")
-		} else {
-			fmt.Println(appName + "-" + version)
-		}
+		fmt.Println(appName + "-" + version)
 		os.Exit(0)
 	}
 
@@ -88,6 +85,7 @@ func main() {
 		log.Fatal("need a command to run")
 	}
 
+	start := time.Now()
 	for {
 		cmd := exec.Command(cmds[0], cmds[1:]...)
 		if !*quiet {
@@ -96,6 +94,9 @@ func main() {
 		}
 		if err := cmd.Run(); err == nil {
 			break
+		}
+		if *max != 0 && time.Since(start) >= *max {
+			log.Fatalf("it never worked!")
 		}
 		retryFunc()
 	}
