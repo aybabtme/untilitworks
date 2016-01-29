@@ -6,6 +6,8 @@ Retry some command until it works.
 $ untilitworks curl http://mywebsite.com
 ```
 
+<img width="376" src="https://cloud.githubusercontent.com/assets/1189716/12663176/b006cace-c5f3-11e5-9654-271063ac9510.png">
+
 ## usage
 
 Exponential backoff (with random jitter):
