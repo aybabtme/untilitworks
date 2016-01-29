@@ -35,13 +35,13 @@ untilitworks: it failed! retrying in 1s
 ### linux
 
 ```bash
-wget -qO- https://github.com/aybabtme/untilitworks/releases/download/0.1/untilitworks_linux.tar.gz | tar xvz
+wget -qO- https://github.com/aybabtme/untilitworks/releases/download/0.2/untilitworks_linux.tar.gz | tar xvz
 ```
 
 ### darwin
 
 ```bash
-wget -qO- https://github.com/aybabtme/untilitworks/releases/download/0.1/untilitworks_darwin.tar.gz | tar xvz
+wget -qO- https://github.com/aybabtme/untilitworks/releases/download/0.2/untilitworks_darwin.tar.gz | tar xvz
 ```
 
 
